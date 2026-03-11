@@ -1,5 +1,5 @@
 {
-  "name": "@vantasdk/vanta-mcp-server",
+  "name": "@mrknmc/vanta-mcp-server",
   "version": "1.2.0",
   "main": "index.js",
   "type": "module",
@@ -27,16 +27,16 @@
     "security",
     "compliance"
   ],
-  "author": "Vanta Inc (https://www.vanta.com/)",
+  "author": "mrknmc",
   "license": "MIT",
   "description": "Model Context Protocol server for Vanta's security compliance platform",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VantaInc/vanta-mcp-server.git"
+    "url": "git+https://github.com/mrknmc/vanta-mcp-server.git"
   },
-  "homepage": "https://github.com/VantaInc/vanta-mcp-server#readme",
+  "homepage": "https://github.com/mrknmc/vanta-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/VantaInc/vanta-mcp-server/blob/main/SECURITY.md"
+    "url": "https://github.com/mrknmc/vanta-mcp-server/blob/main/SECURITY.md"
   },
   "engines": {
     "node": ">=18"

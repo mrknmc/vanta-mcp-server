@@ -106,13 +106,7 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 ### Vanta OAuth Credentials
 
 1. Create OAuth credentials from [Vanta's developer dashboard](https://developer.vanta.com/docs/api-access-setup)
-2. Save the `client_id` and `client_secret` to an env file:
-   ```json
-   {
-     "client_id": "your_client_id_here",
-     "client_secret": "your_client_secret_here"
-   }
-   ```
+2. Note your `client_id` and `client_secret` — you'll pass them as environment variables.
 
 > **Note:** Vanta currently allows only a single active access_token per Application. [More info here](https://developer.vanta.com/docs/api-access-setup#authentication-and-token-retrieval)
 
@@ -125,9 +119,10 @@ Add the server to your `claude_desktop_config.json`:
   "mcpServers": {
     "vanta": {
       "command": "npx",
-      "args": ["-y", "@vantasdk/vanta-mcp-server"],
+      "args": ["-y", "@mrknmc/vanta-mcp-server"],
       "env": {
-        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
+        "VANTA_CLIENT_ID": "your_client_id_here",
+        "VANTA_CLIENT_SECRET": "your_client_secret_here"
       }
     }
   }
@@ -145,9 +140,10 @@ Add the server to your Cursor MCP settings:
   "mcpServers": {
     "Vanta": {
       "command": "npx",
-      "args": ["-y", "@vantasdk/vanta-mcp-server"],
+      "args": ["-y", "@mrknmc/vanta-mcp-server"],
       "env": {
-        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
+        "VANTA_CLIENT_ID": "your_client_id_here",
+        "VANTA_CLIENT_SECRET": "your_client_secret_here"
       }
     }
   }
@@ -156,27 +152,29 @@ Add the server to your Cursor MCP settings:
 
 ### Environment Variables
 
-- `VANTA_ENV_FILE` (required): Absolute path to the JSON file containing your OAuth credentials
+- `VANTA_CLIENT_ID` (required): Your Vanta OAuth client ID
+- `VANTA_CLIENT_SECRET` (required): Your Vanta OAuth client secret
+- `VANTA_ENV_FILE` (alternative): Absolute path to a JSON file containing `client_id` and `client_secret` (legacy, takes lower priority than the env vars above)
 
 ## Installation
 
 ### NPX (Recommended)
 
 ```bash
-npx @vantasdk/vanta-mcp-server
+npx @mrknmc/vanta-mcp-server
 ```
 
 ### Global Installation
 
 ```bash
-npm install -g @vantasdk/vanta-mcp-server
+npm install -g @mrknmc/vanta-mcp-server
 vanta-mcp-server
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/VantaInc/vanta-mcp-server.git
+git clone https://github.com/mrknmc/vanta-mcp-server.git
 cd vanta-mcp-server
 npm install
 npm run build
@@ -206,7 +204,8 @@ Now you can configure Claude Desktop or Cursor to use the built executable:
       "command": "node",
       "args": ["/absolute/path/to/vanta-mcp-server/build/index.js"],
       "env": {
-        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
+        "VANTA_CLIENT_ID": "your_client_id_here",
+        "VANTA_CLIENT_SECRET": "your_client_secret_here"
       }
     }
   }
@@ -274,7 +273,7 @@ For detailed architecture documentation, see [`src/operations/README.md`](src/op
 You can use the MCP Inspector to debug the server:
 
 ```bash
-npx @modelcontextprotocol/inspector npx @vantasdk/vanta-mcp-server
+npx @modelcontextprotocol/inspector npx @mrknmc/vanta-mcp-server
 ```
 
 The inspector will open in your browser, allowing you to test tool calls and inspect the server's behavior.
@@ -285,7 +284,7 @@ If you want to test a local build you can do so using:
 npx @modelcontextprotocol/inspector node path/to/build/index.js
 ```
 
-In the browser window you will then need to add the environment variable "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
+In the browser window you will then need to add the environment variables `VANTA_CLIENT_ID` and `VANTA_CLIENT_SECRET`.
 
 ## Example Usage
 
